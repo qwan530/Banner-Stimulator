@@ -53,6 +53,8 @@ public class BannerStimulator {
         }
     }
 
+
+    // EFFECTS: pull characters from the banner and return result
     private void pull() {
         if (banner.getCharacters().size() == 0) {
             System.out.println("no character in this banner!");
@@ -65,6 +67,7 @@ public class BannerStimulator {
         }
     }
 
+    // EFF
     private void createBanner() {
         System.out.println("enter the name of banner");
         this.banner = new Banner(input.next());
@@ -105,7 +108,6 @@ public class BannerStimulator {
         System.out.println("enter the rarity of character");
         character.setRarity(input.nextInt());
         banner.addCharacter(character);
-        System.out.println("character added!");
         System.out.println("add more characters? (y/n)");
         String command = input.next();
         if (command.equals("y")) {

@@ -35,6 +35,16 @@ class BannerTest {
     }
 
     @Test
+    void testAddCharacterTwice() {
+        banner.addCharacter(c1);
+        banner.addCharacter(c1);
+        ArrayList<Character> characters = banner.getCharacters();
+        assertTrue(characters.contains(c1));
+        assertFalse(characters.contains(c2));
+        assertEquals(1, characters.size());
+    }
+
+    @Test
     void testDeleteCharacter() {
         banner.addCharacter(c1);
         banner.addCharacter(c2);

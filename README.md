@@ -30,5 +30,3 @@ As a user, I want to be able to add characters to the banner.
 As a user, I want to be able to view the list of characters in the banner.
 
 As a user, I want to be able to pull from the banner and see the results.
-
-As a user, I want to be able to see statistics on how many rare characters I have pulled from the past pulls.

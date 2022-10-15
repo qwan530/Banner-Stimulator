@@ -16,7 +16,13 @@ public class Banner {
 
     // EFFECTS: add a character into the banner
     public void addCharacter(Character character) {
-        characters.add(character);
+
+        if (!this.characters.contains(character)) {
+            this.characters.add(character);
+            System.out.println("character added!");
+        } else {
+            System.out.println("character" + character.getName() + "is already in the banner");
+        }
     }
 
     // EFFECTS: delete a character from the banner
