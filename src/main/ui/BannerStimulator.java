@@ -54,11 +54,15 @@ public class BannerStimulator {
     }
 
     private void pull() {
-        int min = 1;
-        int max = banner.getCharacters().size();
-        int random = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        Character result = banner.getCharacters().get(random);
-        System.out.println("The result is:" + result.getName() + "," + result.getRarity());
+        if (banner.getCharacters().size() == 0) {
+            System.out.println("no character in this banner!");
+        } else {
+            int min = 1;
+            int max = banner.getCharacters().size();
+            int random = (int) Math.floor(Math.random() * (max - min + 1) + min);
+            Character result = banner.getCharacters().get(random);
+            System.out.println("The result is:" + result.getName() + "," + result.getRarity());
+        }
     }
 
     private void createBanner() {
