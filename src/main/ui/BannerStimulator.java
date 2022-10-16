@@ -67,13 +67,16 @@ public class BannerStimulator {
         }
     }
 
-    // EFF
+    // MODIFIES: this
+    // EFFECTS: create a new banner with the name inputed
     private void createBanner() {
         System.out.println("enter the name of banner");
         this.banner = new Banner(input.next());
         System.out.println("New banner" + banner.getTitle() + "is created!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: display the option of modifying banner
     private void modifyBanner() {
         System.out.println("enter v to view characters in banner");
         System.out.println("enter a to add character");
@@ -91,6 +94,7 @@ public class BannerStimulator {
         }
     }
 
+    // EFFECTS: display the characters currently in the banner
     private void viewCharacter() {
         ArrayList<Character> characters = banner.getCharacters();
         if (characters.isEmpty()) {
@@ -102,6 +106,8 @@ public class BannerStimulator {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: add a character into the banner, do not allow duplicate
     private void addingCharacter() {
         System.out.println("enter the name of character");
         Character character = new Character(input.next(), 0);
@@ -119,6 +125,7 @@ public class BannerStimulator {
         }
     }
 
+    // EFFECTS: delete the character from the banner
     private void deletingCharacter() {
         System.out.println("enter the name of character");
         ArrayList<Character> lst = banner.getCharacters();

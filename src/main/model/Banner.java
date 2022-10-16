@@ -14,6 +14,7 @@ public class Banner {
         this.characters = new ArrayList<>();
     }
 
+    // MODIFIES: this
     // EFFECTS: add a character into the banner
     public void addCharacter(Character character) {
 
@@ -25,15 +26,18 @@ public class Banner {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: delete a character from the banner
     public void deleteCharacter(Character character) {
         characters.remove(character);
     }
 
+    // EFFECTS: return the title of banner
     public String getTitle() {
         return title;
     }
 
+    // EFFECTS: return the character list of banner
     public ArrayList<Character> getCharacters() {
         return characters;
     }
