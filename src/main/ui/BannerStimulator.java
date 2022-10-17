@@ -59,16 +59,16 @@ public class BannerStimulator {
         if (banner.getCharacters().size() == 0) {
             System.out.println("no character in this banner!");
         } else {
-            int min = 1;
+            int min = 0;
             int max = banner.getCharacters().size();
-            int random = (int) Math.floor(Math.random() * (max - min + 1) + min);
+            int random = (int) Math.floor(Math.random() * (max - min) + min);
             Character result = banner.getCharacters().get(random);
             System.out.println("The result is:" + result.getName() + "," + result.getRarity());
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: create a new banner with the name inputed
+    // EFFECTS: create a new banner with the name inputted
     private void createBanner() {
         System.out.println("enter the name of banner");
         this.banner = new Banner(input.next());
@@ -111,7 +111,7 @@ public class BannerStimulator {
     private void addingCharacter() {
         System.out.println("enter the name of character");
         Character character = new Character(input.next(), 0);
-        System.out.println("enter the rarity of character");
+        System.out.println("enter the rarity of character (1-6)");
         character.setRarity(input.nextInt());
         banner.addCharacter(character);
         System.out.println("add more characters? (y/n)");
@@ -119,7 +119,7 @@ public class BannerStimulator {
         if (command.equals("y")) {
             addingCharacter();
         } else if (command.equals("n")) {
-            displayMenu();
+            System.out.println("return to menu");
         } else {
             System.out.println("Selection not valid");
         }
