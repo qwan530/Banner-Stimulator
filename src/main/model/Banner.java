@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // Represents a banner with a name and list of characters in it
-public class Banner {
+public class Banner implements Writable {
 
     private String title;
     private ArrayList<Character> characters;
@@ -41,4 +45,24 @@ public class Banner {
     public ArrayList<Character> getCharacters() {
         return characters;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("characters", charactersToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray charactersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Character c : characters) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
+    }
 }
+

@@ -30,3 +30,7 @@ As a user, I want to be able to add characters to the banner.
 As a user, I want to be able to view the list of characters in the banner.
 
 As a user, I want to be able to pull from the banner and see the results.
+
+As a user, I want to be able to save my banner to file.
+
+As a user, I want to be able to be able to load my banner from file 

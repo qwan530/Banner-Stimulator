@@ -1,6 +1,11 @@
 package model;
 
-public class Character {
+// Represents a character with a name and rarity of characters in it
+
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Character implements Writable {
 
     private String name;
     private int rarity;
@@ -28,4 +33,13 @@ public class Character {
     public int getRarity() {
         return rarity;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("rarity", rarity);
+        return json;
+    }
 }
+

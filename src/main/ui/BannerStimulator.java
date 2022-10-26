@@ -2,17 +2,26 @@ package ui;
 
 import model.Banner;
 import model.Character;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Represents the banner stimulator application
 public class BannerStimulator {
+    private static final String JSON_STORE = "./data/banner.json";
     private Banner banner;
-    private Character character;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: run the banner stimulator application
-    public BannerStimulator() {
+    public BannerStimulator() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runStimulator();
     }
 
@@ -46,10 +55,36 @@ public class BannerStimulator {
             modifyBanner();
         } else if (command.equals("c")) {
             createBanner();
-        } else if (command.equals("s")) {
+        } else if (command.equals("p")) {
             pull();
+        } else if (command.equals("s")) {
+            saveBanner();
+        } else if (command.equals("l")) {
+            loadBanner();
         } else {
             System.out.println("Selection not valid");
+        }
+    }
+
+    private void loadBanner() {
+        try {
+            banner = jsonReader.read();
+            System.out.println("Loaded " + banner.getTitle() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+
+    // EFFECTS: saves the banner to file
+    private void saveBanner() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(banner);
+            jsonWriter.close();
+            System.out.println("Saved " + banner.getTitle() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 
@@ -158,9 +193,16 @@ public class BannerStimulator {
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("Gacha Game Banner Stimulator");
-        System.out.println("enter q to quit");
         System.out.println("enter c to create banner");
+        System.out.println("enter l to load banner from file");
+        System.out.println("enter s to save banner to file");
         System.out.println("enter n to modify banner");
-        System.out.println("enter s to start pulling");
+        System.out.println("enter p to start pulling");
+        System.out.println("enter q to quit");
     }
 }
+
+
+
+
+
