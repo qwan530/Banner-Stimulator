@@ -1,0 +1,13 @@
+{
+  "characters": [
+    {
+      "name": "a",
+      "rarity": 1
+    },
+    {
+      "name": "b",
+      "rarity": 2
+    }
+  ],
+  "title": "My banner"
+}
