@@ -25,8 +25,7 @@ public class JsonReaderTest extends JsonTest{
 
     @Test
     void testReaderEmptyBanner() {
-        JsonReader reader =
-                new JsonReader("/Users/wq/Desktop/CPSC210/project_e0e3c/data/testWriterEmptyBanner.json");
+        JsonReader reader = new JsonReader("./data/testReaderEmptyBanner.json");
         try {
             Banner banner = reader.read();
             assertEquals("My banner", banner.getTitle());
@@ -39,7 +38,7 @@ public class JsonReaderTest extends JsonTest{
     @Test
     void testReaderGeneralBanner() {
         JsonReader reader
-                = new JsonReader("/Users/wq/Desktop/CPSC210/project_e0e3c/data/testWriterGeneralBanner.json");
+                = new JsonReader("./data/testReaderGeneralBanner.json");
         try {
             Banner banner = reader.read();
             assertEquals("My banner", banner.getTitle());
