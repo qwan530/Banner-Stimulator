@@ -9,6 +9,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Method was taken from JsonWriterTest in:
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
 class JsonWriterTest extends JsonTest {
 
     @Test

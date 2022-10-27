@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Some method was taken from WorkRoomApp in:
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
 // Represents the banner stimulator application
 public class BannerStimulator {
     private static final String JSON_STORE = "./data/banner.json";

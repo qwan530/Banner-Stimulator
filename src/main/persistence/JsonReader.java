@@ -1,7 +1,5 @@
 package persistence;
 
-// Represent a  reader that reads banner from JSON data stored in file
-
 import model.Banner;
 import model.Character;
 import org.json.JSONArray;
@@ -12,6 +10,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
+
+// Method was taken from JsonReader in:
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
+// Represent a  reader that reads banner from JSON data stored in file
 
 public class JsonReader {
     private String source;
@@ -48,7 +51,7 @@ public class JsonReader {
         return banner;
     }
 
-    // MODIFIES: wr
+    // MODIFIES: banner
     // EFFECTS: parses characters from JSON object and adds them to banner
     private void addCharacters(Banner banner, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("characters");
@@ -58,7 +61,7 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
+    // MODIFIES: banner
     // EFFECTS: parses character from JSON object and adds it to banner
     private void addCharacter(Banner banner, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
@@ -66,8 +69,4 @@ public class JsonReader {
         Character c = new Character(name, rarity);
         banner.addCharacter(c);
     }
-
-
-
-
 }

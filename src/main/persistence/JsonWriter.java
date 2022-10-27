@@ -5,9 +5,11 @@ import org.json.JSONObject;
 
 import java.io.*;
 
+// Method was taken from JsonWriter in:
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
+// Represents a writer that writes JSON representation of banner to file
 
-// Represents a writer that writes JSON representation of workroom to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -26,7 +28,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of banner to file
     public void write(Banner banner) {
         JSONObject json = banner.toJson();
         saveToFile(json.toString(TAB));
