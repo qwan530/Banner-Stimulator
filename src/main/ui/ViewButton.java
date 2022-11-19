@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 // Create a view button
 public class ViewButton implements ActionListener {
-    Banner banner;
+
     Stimulator stimulator;
 
     //MODIFIES: this
@@ -19,7 +19,6 @@ public class ViewButton implements ActionListener {
         view.setHorizontalTextPosition(JButton.CENTER);
         view.addActionListener(this);
         this.stimulator = stimulator;
-        this.banner = stimulator.banner;
 
         panel.add(view);
     }

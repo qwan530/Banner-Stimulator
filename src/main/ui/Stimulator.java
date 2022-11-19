@@ -15,7 +15,7 @@ import java.util.ArrayList;
 // Represents the banner stimulator application
 public class Stimulator extends JFrame {
     private JFrame frame;
-    public Banner banner;
+    private Banner banner;
 
     private static final Color background = new Color(127,151,137);
     private ImageIcon pullIcon = new ImageIcon("img.png");
@@ -123,8 +123,15 @@ public class Stimulator extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: create a new banner with the name inputted
-    public void createBanner(String name) {
-        this.banner = new Banner(name);
+    public void createBanner() {
+        if (!(banner == null)) {
+            JOptionPane.showMessageDialog(null,"You have already created a banner!");
+        } else {
+            String name = JOptionPane.showInputDialog("enter the name of banner");
+            this.banner = new Banner(name);
+            JOptionPane.showMessageDialog(null, "New banner" + name + " is created!",
+                    "Create Banner", JOptionPane.PLAIN_MESSAGE);
+        }
     }
 
 

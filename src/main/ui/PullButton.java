@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 
 public class PullButton implements ActionListener {
 
-    private Banner banner;
     private Stimulator stimulator;
 
     public PullButton(JPanel panel, Stimulator stimulator) {
@@ -19,7 +18,7 @@ public class PullButton implements ActionListener {
         pull.addActionListener(this);
 
         this.stimulator = stimulator;
-        this.banner = stimulator.banner;
+
 
         panel.add(pull);
     }

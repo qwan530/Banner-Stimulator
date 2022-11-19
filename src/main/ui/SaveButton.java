@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 // Create a save button
 public class SaveButton implements ActionListener {
 
-    private Banner banner;
     private Stimulator stimulator;
 
     //MODIFIES: this
@@ -20,9 +19,7 @@ public class SaveButton implements ActionListener {
         save.setHorizontalTextPosition(JButton.CENTER);
         save.addActionListener(this);
 
-
         this.stimulator = stimulator;
-        this.banner = stimulator.banner;
 
         panel.add(save);
     }

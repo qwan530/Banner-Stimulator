@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 // Create a load button
 public class LoadButton implements ActionListener {
 
-    private Banner banner;
     private Stimulator stimulator;
 
     //MODIFIES: this
@@ -23,7 +22,6 @@ public class LoadButton implements ActionListener {
         load.addActionListener(this);
 
         this.stimulator = stimulator;
-        this.banner = stimulator.banner;
 
         panel.add(load);
     }
