@@ -20,6 +20,7 @@ public class Stimulator extends JFrame {
     private static final Color background = new Color(127,151,137);
     private ImageIcon pullIcon = new ImageIcon("img.png");
     private ImageIcon saveIcon = new ImageIcon("img_1.png");
+    private ImageIcon addIcon = new ImageIcon("img_2.png");
 
     static final String JSON_STORE = "./data/banner.json";
     private JsonWriter jsonWriter;
@@ -107,10 +108,12 @@ public class Stimulator extends JFrame {
     void addCharacter() {
         String name = JOptionPane.showInputDialog("Enter the name of character");
         Character character = new Character(name, 0);
-        int rarity = Integer.parseInt(JOptionPane.showInputDialog("Enter the rarity of character"));
+        int rarity = Integer.parseInt(JOptionPane.showInputDialog(null,
+                "Enter the rarity of character (1-5)", "Add character"));
         character.setRarity(rarity);
         banner.addCharacter(character);
-        JOptionPane.showMessageDialog(null, "Character added!");
+        JOptionPane.showMessageDialog(null, "Character added!", "Add charcacter",
+                JOptionPane.PLAIN_MESSAGE, addIcon);
         var selection = JOptionPane.showConfirmDialog(null,"Add more characters?");
         if (selection == 0) {
             addCharacter();
@@ -176,11 +179,12 @@ public class Stimulator extends JFrame {
                 jsonWriter.write(banner);
                 jsonWriter.close();
                 JOptionPane.showMessageDialog(null,
-                        "Saved " + banner.getTitle() + " to " + JSON_STORE);
+                        "Saved " + banner.getTitle() + " to " + JSON_STORE, "Save",
+                        JOptionPane.PLAIN_MESSAGE, saveIcon);
 
             } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(null,
-                        "Unable to write to file: " + JSON_STORE);
+                        "Unable to write to file: " + JSON_STORE, "Save", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -195,7 +199,7 @@ public class Stimulator extends JFrame {
                     JOptionPane.PLAIN_MESSAGE, saveIcon);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,
-                    "Unable to read from file: " + JSON_STORE);
+                    "Unable to read from file: " + JSON_STORE, "Load", JOptionPane.ERROR_MESSAGE);
         }
     }
 

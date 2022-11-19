@@ -25,7 +25,7 @@ hesitate to do it.
 
 As a user, I want to be able to add a banner that I want to stimulate.
 
-As a user, I want to be able to add characters to the banner.
+As a user, I want to be able to add and delete characters to the banner.
 
 As a user, I want to be able to view the list of characters in the banner.
 
@@ -34,3 +34,13 @@ As a user, I want to be able to pull from the banner and see the results.
 As a user, I want to be able to save my banner to file.
 
 As a user, I want to be able to be able to load my banner from file 
+
+## Instructions for Grader
+
+- You can generate the first required event related to adding Xs to a Y by clicking the button labelled "Modify the 
+characters", then choose "add" option, or "delete" option.
+- You can generate the second required event related to adding Xs to a Y by clicking the button labelled "View the 
+- characters".
+- You can locate my visual component by the icon of messages displayed.
+- You can save the state of my application by the button labelled "save".
+- You can reload the state of my application by the button labelled "load".
