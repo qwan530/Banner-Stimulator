@@ -35,7 +35,7 @@ public class ModifyButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String[] options = {"add", "delete"};
 
-        var selection = JOptionPane.showOptionDialog(null,"choose to add or delete character",
+        int selection = JOptionPane.showOptionDialog(null,"choose to add or delete character",
                 "Modify Banner", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, options, options[0]);
 
