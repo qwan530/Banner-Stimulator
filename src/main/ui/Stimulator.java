@@ -114,7 +114,7 @@ public class Stimulator extends JFrame {
         banner.addCharacter(character);
         JOptionPane.showMessageDialog(null, "Character added!", "Add charcacter",
                 JOptionPane.PLAIN_MESSAGE, addIcon);
-        var selection = JOptionPane.showConfirmDialog(null,"Add more characters?");
+        int selection = JOptionPane.showConfirmDialog(null,"Add more characters?");
         if (selection == 0) {
             addCharacter();
         }
@@ -141,7 +141,7 @@ public class Stimulator extends JFrame {
             }
         }
         JOptionPane.showMessageDialog(null, "Character deleted!");
-        var selection = JOptionPane.showConfirmDialog(null,"Delete more characters?");
+        int selection = JOptionPane.showConfirmDialog(null,"Delete more characters?");
         if (selection == 0) {
             deleteCharacter();
         }
