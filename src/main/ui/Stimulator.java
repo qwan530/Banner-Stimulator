@@ -12,15 +12,21 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+// Represents the banner stimulator application
 public class Stimulator extends JFrame {
-        static final String JSON_STORE = "./data/banner.json";
-        private static final Color background = new Color(127,151,137);
-        private JFrame frame;
-        public Banner banner;
-        private JsonWriter jsonWriter;
-        private JsonReader jsonReader;
+    private JFrame frame;
+    public Banner banner;
 
+    private static final Color background = new Color(127,151,137);
+    private ImageIcon pullIcon = new ImageIcon("img.png");
+    private ImageIcon saveIcon = new ImageIcon("img_1.png");
+
+    static final String JSON_STORE = "./data/banner.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+
+    // EFFECTS: run the banner stimulator application
     public Stimulator() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -39,6 +45,8 @@ public class Stimulator extends JFrame {
         frame.setVisible(true);
     }
 
+
+    //EFFECTS: add the subtitle to the frame
     private void addSubtitle() {
         JPanel subtitle = new JPanel();
         subtitle.setBounds(0,110,900,69);
@@ -53,10 +61,11 @@ public class Stimulator extends JFrame {
     }
 
 
+    //EFFECTS: add create, modify, view, pull button to the frame
     void addMenu1() {
         JPanel menu = new JPanel();
         menu.setBackground(background);
-        menu.setBounds(370,200, 160,200);
+        menu.setBounds(370,200, 170,200);
         CreateButton createButton = new CreateButton(menu, this);
         ModifyButton modifyButton = new ModifyButton(menu, this);
         ViewButton viewButton = new ViewButton(menu, this);
@@ -65,6 +74,8 @@ public class Stimulator extends JFrame {
         frame.add(menu);
     }
 
+
+    //EFFECTS: add save and load button to the frame
     void addMenu2() {
         JPanel menu = new JPanel();
         menu.setBackground(background);
@@ -90,26 +101,34 @@ public class Stimulator extends JFrame {
         frame.add(title);
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: add a character into the banner, do not allow duplicate
     void addCharacter() {
-        String name = JOptionPane.showInputDialog("enter the name of character");
+        String name = JOptionPane.showInputDialog("Enter the name of character");
         Character character = new Character(name, 0);
-        int rarity = Integer.parseInt(JOptionPane.showInputDialog("enter the rarity of character"));
+        int rarity = Integer.parseInt(JOptionPane.showInputDialog("Enter the rarity of character"));
         character.setRarity(rarity);
         banner.addCharacter(character);
         JOptionPane.showMessageDialog(null, "Character added!");
-        var selection = JOptionPane.showConfirmDialog(null,"add more characters?");
+        var selection = JOptionPane.showConfirmDialog(null,"Add more characters?");
         if (selection == 0) {
             addCharacter();
         }
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: create a new banner with the name inputted
     public void createBanner(String name) {
         this.banner = new Banner(name);
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: delete the character from the banner
     public void deleteCharacter() {
-        String name = JOptionPane.showInputDialog("enter the name of character");
+        String name = JOptionPane.showInputDialog("Enter the name of character");
         ArrayList<Character> lst = banner.getCharacters();
         for (int i = 0; i < lst.size(); i++) {
             Character character1 = lst.get(i);
@@ -119,18 +138,24 @@ public class Stimulator extends JFrame {
             }
         }
         JOptionPane.showMessageDialog(null, "Character deleted!");
-        var selection = JOptionPane.showConfirmDialog(null,"delete more characters?");
+        var selection = JOptionPane.showConfirmDialog(null,"Delete more characters?");
         if (selection == 0) {
             deleteCharacter();
         }
     }
 
+
+    // EFFECTS: display the characters currently in the banner
     public void viewCharacter() {
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.addColumn("Name");
         tableModel.addColumn("Rarity");
 
         ArrayList<Character> characters = banner.getCharacters();
+        if (characters == null) {
+            JOptionPane.showMessageDialog(null, "No characters in the banner",
+                    "Characters", JOptionPane.ERROR_MESSAGE);
+        }
         for (Character c : characters) {
             tableModel.addRow(new Object[] {c.getName(), c.getRarity()});
         }
@@ -139,9 +164,12 @@ public class Stimulator extends JFrame {
 
     }
 
+
+    // EFFECTS: saves the banner to file
     public void saveBanner() {
         if (banner == null) {
-            JOptionPane.showMessageDialog(null, "No banner created yet!");
+            JOptionPane.showMessageDialog(null, "No banner created yet!", "Save",
+                    JOptionPane.ERROR_MESSAGE);
         } else {
             try {
                 jsonWriter.open();
@@ -154,31 +182,37 @@ public class Stimulator extends JFrame {
                 JOptionPane.showMessageDialog(null,
                         "Unable to write to file: " + JSON_STORE);
             }
-
         }
     }
 
+
+    // EFFECTS: load the banner from file
     public void loadBanner() {
         try {
             banner = jsonReader.read();
             JOptionPane.showMessageDialog(null,
-                    "Loaded " + banner.getTitle() + " from " + JSON_STORE);
+                    "Loaded " + banner.getTitle() + " from " + JSON_STORE, "Load",
+                    JOptionPane.PLAIN_MESSAGE, saveIcon);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,
                     "Unable to read from file: " + JSON_STORE);
         }
     }
 
+
+    // EFFECTS: pull characters from the banner and return result
     public void pull() {
         if (banner.getCharacters().size() == 0) {
-            JOptionPane.showMessageDialog(null,"no character in this banner!");
+            JOptionPane.showMessageDialog(null,"no character in this banner!", "Pull",
+                    JOptionPane.ERROR_MESSAGE);
         } else {
             int min = 0;
             int max = banner.getCharacters().size();
             int random = (int) Math.floor(Math.random() * (max - min) + min);
             Character result = banner.getCharacters().get(random);
             JOptionPane.showMessageDialog(null,
-                    "The result is:" + result.getName() + "," + result.getRarity());
+                    "The result is:" + result.getName() + "," + result.getRarity(), "Pull",
+                    JOptionPane.PLAIN_MESSAGE, pullIcon);
         }
     }
 }

@@ -9,12 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+// Create a modify button
 public class ModifyButton implements ActionListener {
 
     Banner banner;
     Stimulator stimulator;
     private static final Color background = new Color(127,151,137);
 
+    //MODIFIES: this
+    //EFFECTS: construct a modify button and add to the panel
     public ModifyButton(JPanel panel, Stimulator stimulator) {
         this.banner = stimulator.banner;
         this.stimulator = stimulator;
@@ -27,6 +30,7 @@ public class ModifyButton implements ActionListener {
         panel.add(create);
     }
 
+    //EFFECTS: add or delete character from the banner
     @Override
     public void actionPerformed(ActionEvent e) {
         String[] options = {"add", "delete"};

@@ -18,8 +18,6 @@ public class PullButton implements ActionListener {
         pull.setHorizontalTextPosition(JButton.CENTER);
         pull.addActionListener(this);
 
-
-
         this.stimulator = stimulator;
         this.banner = stimulator.banner;
 
