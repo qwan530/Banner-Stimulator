@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 // Represents the banner stimulator application
 public class BannerStimulator {
-    private static final String JSON_STORE = "./data/banner.json";
+    static final String JSON_STORE = "./data/banner.json";
     private Banner banner;
     private Scanner input;
     private JsonWriter jsonWriter;

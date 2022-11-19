@@ -1,4 +1,17 @@
 {
-    "characters": [],
-    "title": ""
+    "characters": [
+        {
+            "name": "a",
+            "rarity": 1
+        },
+        {
+            "name": "b",
+            "rarity": 2
+        },
+        {
+            "name": "c",
+            "rarity": 3
+        }
+    ],
+    "title": "a"
 }
