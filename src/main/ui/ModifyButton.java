@@ -31,17 +31,6 @@ public class ModifyButton implements ActionListener {
     //EFFECTS: add or delete character from the banner
     @Override
     public void actionPerformed(ActionEvent e) {
-        String[] options = {"add", "delete"};
-
-        int selection = JOptionPane.showOptionDialog(null,"choose to add or delete character",
-                "Modify Banner", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-                null, options, options[0]);
-
-        if (selection == 0) {
-            stimulator.addCharacter();
-        } else {
-            stimulator.deleteCharacter();
-        }
+        stimulator.modifyBanner();
     }
-
 }

@@ -12,7 +12,7 @@ public class CharacterTest {
 
     @BeforeEach
     void runBefore() {
-        testCharacter = new Character("Saber", 5);
+        testCharacter = new Character("Saber", "5");
     }
 
     @Test
@@ -23,8 +23,8 @@ public class CharacterTest {
 
     @Test
     void testSetRarity() {
-        testCharacter.setRarity(4);
-        assertEquals(4, testCharacter.getRarity());
+        testCharacter.setRarity("4");
+        assertEquals("4", testCharacter.getRarity());
     }
 
     @Test

@@ -1,13 +1,13 @@
 {
     "characters": [
         {
-            "name": "2",
-            "rarity": 6
+            "name": "a",
+            "rarity": 1
         },
         {
-            "name": "12",
-            "rarity": 6
+            "name": "b",
+            "rarity": 2
         }
     ],
-    "title": "Arashi"
+    "title": "asd"
 }

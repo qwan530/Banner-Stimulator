@@ -21,10 +21,9 @@ public class Banner implements Writable {
     // MODIFIES: this
     // EFFECTS: add a character into the banner
     public void addCharacter(Character character) {
-
         if (!this.characters.contains(character)) {
             this.characters.add(character);
-            System.out.println("character added!");
+            EventLog.getInstance().logEvent(new Event("Character " + character.getName() + " added."));
         } else {
             System.out.println("character" + character.getName() + "is already in the banner");
         }
@@ -34,6 +33,7 @@ public class Banner implements Writable {
     // EFFECTS: delete a character from the banner
     public void deleteCharacter(Character character) {
         characters.remove(character);
+        EventLog.getInstance().logEvent(new Event("Character " + character.getName() + " deleted."));
     }
 
     // EFFECTS: return the title of banner
@@ -63,6 +63,16 @@ public class Banner implements Writable {
         }
 
         return jsonArray;
+    }
+
+    // EFFECTS: pull one character from the banner
+    public Character pullCharacter() {
+        int min = 0;
+        int max = getCharacters().size();
+        int random = (int) Math.floor(Math.random() * (max - min) + min);
+        Character result = getCharacters().get(random);
+        EventLog.getInstance().logEvent(new Event("Pulled " + result.getName() + " from banner."));
+        return result;
     }
 }
 

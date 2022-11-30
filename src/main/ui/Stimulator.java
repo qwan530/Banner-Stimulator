@@ -2,12 +2,16 @@ package ui;
 
 import model.Banner;
 import model.Character;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,19 +35,35 @@ public class Stimulator extends JFrame {
     public Stimulator() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-
         frame = new JFrame("Banner Stimulator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(900,600);
         frame.getContentPane().setBackground(background);
 
+        addMenu();
+
+        frame.setLayout(null);
+        frame.setVisible(true);
+
+        setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                EventLog log = EventLog.getInstance();
+                for (Event event : log) {
+                    System.out.println(event);
+                }
+                e.getWindow().dispose();
+            }
+        }
+        );
+    }
+
+    //EFFECTS: add all the components to the frame
+    private void addMenu() {
         addTitle();
         addSubtitle();
         addMenu1();
         addMenu2();
-
-        frame.setLayout(null);
-        frame.setVisible(true);
     }
 
 
@@ -106,17 +126,21 @@ public class Stimulator extends JFrame {
     // MODIFIES: this
     // EFFECTS: add a character into the banner, do not allow duplicate
     void addCharacter() {
-        String name = JOptionPane.showInputDialog("Enter the name of character");
-        Character character = new Character(name, 0);
-        int rarity = Integer.parseInt(JOptionPane.showInputDialog(null,
-                "Enter the rarity of character (1-5)", "Add character"));
-        character.setRarity(rarity);
-        banner.addCharacter(character);
-        JOptionPane.showMessageDialog(null, "Character added!", "Add charcacter",
-                JOptionPane.PLAIN_MESSAGE, addIcon);
-        int selection = JOptionPane.showConfirmDialog(null,"Add more characters?");
-        if (selection == 0) {
-            addCharacter();
+        if (banner == null) {
+            JOptionPane.showMessageDialog(null, "No banner created yet!");
+        } else {
+            String name = JOptionPane.showInputDialog("Enter the name of character");
+            Character character = new Character(name, "0");
+            String rarity = (JOptionPane.showInputDialog(null,
+                    "Enter the rarity of character (1-5)", ""));
+            character.setRarity(rarity);
+            banner.addCharacter(character);
+            JOptionPane.showMessageDialog(null, "Character added!", "Add charcacter",
+                    JOptionPane.PLAIN_MESSAGE, addIcon);
+            int selection = JOptionPane.showConfirmDialog(null, "Add more characters?");
+            if (selection == 0) {
+                addCharacter();
+            }
         }
     }
 
@@ -136,21 +160,37 @@ public class Stimulator extends JFrame {
 
 
     // MODIFIES: this
-    // EFFECTS: delete the character from the banner
+    // EFFECTS: show the deleting window
     public void deleteCharacter() {
+        if (banner == null) {
+            JOptionPane.showMessageDialog(null, "No banner created yet!");
+        } else {
+            deleting();
+            int selection = JOptionPane.showConfirmDialog(null, "Delete other characters?");
+            if (selection == 0) {
+                deleteCharacter();
+            }
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: delete the character from the banner
+    public void deleting() {
         String name = JOptionPane.showInputDialog("Enter the name of character");
+        Boolean contain = false;
         ArrayList<Character> lst = banner.getCharacters();
         for (int i = 0; i < lst.size(); i++) {
             Character character1 = lst.get(i);
             if (character1.getName().equals(name)) {
                 banner.deleteCharacter(character1);
+                contain = true;
                 break;
             }
         }
-        JOptionPane.showMessageDialog(null, "Character deleted!");
-        int selection = JOptionPane.showConfirmDialog(null,"Delete more characters?");
-        if (selection == 0) {
-            deleteCharacter();
+        if (contain) {
+            JOptionPane.showMessageDialog(null, "Character deleted!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Character does not exist!");
         }
     }
 
@@ -161,17 +201,20 @@ public class Stimulator extends JFrame {
         tableModel.addColumn("Name");
         tableModel.addColumn("Rarity");
 
-        ArrayList<Character> characters = banner.getCharacters();
-        if (characters == null) {
-            JOptionPane.showMessageDialog(null, "No characters in the banner",
-                    "Characters", JOptionPane.ERROR_MESSAGE);
+        if (banner == null) {
+            JOptionPane.showMessageDialog(null, "No banner created yet!");
+        } else {
+            ArrayList<Character> characters = banner.getCharacters();
+            if (characters.size() == 0) {
+                JOptionPane.showMessageDialog(null, "No characters in the banner",
+                        "Characters", JOptionPane.ERROR_MESSAGE);
+            }
+            for (Character c : characters) {
+                tableModel.addRow(new Object[]{c.getName(), c.getRarity()});
+            }
+            JTable table = new JTable(tableModel);
+            JOptionPane.showMessageDialog(null, table, "Characters", JOptionPane.PLAIN_MESSAGE);
         }
-        for (Character c : characters) {
-            tableModel.addRow(new Object[] {c.getName(), c.getRarity()});
-        }
-        JTable table = new JTable(tableModel);
-        JOptionPane.showMessageDialog(null, table, "Characters", JOptionPane.PLAIN_MESSAGE);
-
     }
 
 
@@ -213,17 +256,36 @@ public class Stimulator extends JFrame {
 
     // EFFECTS: pull characters from the banner and return result
     public void pull() {
-        if (banner.getCharacters().size() == 0) {
-            JOptionPane.showMessageDialog(null,"no character in this banner!", "Pull",
-                    JOptionPane.ERROR_MESSAGE);
+        if (banner == null) {
+            JOptionPane.showMessageDialog(null, "No banner created yet!");
         } else {
-            int min = 0;
-            int max = banner.getCharacters().size();
-            int random = (int) Math.floor(Math.random() * (max - min) + min);
-            Character result = banner.getCharacters().get(random);
-            JOptionPane.showMessageDialog(null,
-                    "The result is:" + result.getName() + "," + result.getRarity(), "Pull",
-                    JOptionPane.PLAIN_MESSAGE, pullIcon);
+            if (banner.getCharacters().size() == 0) {
+                JOptionPane.showMessageDialog(null, "no character in this banner!", "Pull",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                Character result = banner.pullCharacter();
+                JOptionPane.showMessageDialog(null,
+                        "The result is:" + result.getName() + "," + result.getRarity(), "Pull",
+                        JOptionPane.PLAIN_MESSAGE, pullIcon);
+            }
+        }
+    }
+
+    public void modifyBanner() {
+        if (banner == null) {
+            JOptionPane.showMessageDialog(null, "No banner created yet!");
+        } else {
+            String[] options = {"add", "delete"};
+
+            int selection = JOptionPane.showOptionDialog(null, "choose to add or delete character",
+                    "Modify Banner", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    null, options, options[0]);
+
+            if (selection == 0) {
+                addCharacter();
+            } else {
+                deleteCharacter();
+            }
         }
     }
 }

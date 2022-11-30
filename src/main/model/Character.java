@@ -8,11 +8,11 @@ import persistence.Writable;
 public class Character implements Writable {
 
     private String name;
-    private int rarity;
+    private String rarity;
 
     // REQUIRES: 6>= rarity >= 1
     // EFFECTS: create a character with a name and a rarity
-    public Character(String name, int rarity) {
+    public Character(String name, String rarity) {
         this.name = name;
         this.rarity = rarity;
     }
@@ -20,7 +20,7 @@ public class Character implements Writable {
     // REQUIRES: 6>= rarity >= 1
     // MODIFIES: this
     // EFFECTS: change the rarity of the character
-    public void setRarity(int rarity) {
+    public void setRarity(String rarity) {
         this.rarity = rarity;
     }
 
@@ -30,7 +30,7 @@ public class Character implements Writable {
     }
 
     // EFFECTS: return the rarity of the character
-    public int getRarity() {
+    public String getRarity() {
         return rarity;
     }
 

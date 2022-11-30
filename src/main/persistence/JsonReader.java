@@ -65,7 +65,7 @@ public class JsonReader {
     // EFFECTS: parses character from JSON object and adds it to banner
     private void addCharacter(Banner banner, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        int rarity = jsonObject.getInt("rarity");
+        String rarity = jsonObject.getString("rarity");
         Character c = new Character(name, rarity);
         banner.addCharacter(c);
     }

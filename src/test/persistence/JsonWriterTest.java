@@ -48,8 +48,8 @@ class JsonWriterTest extends JsonTest {
     void testWriterGeneralWorkroom() {
         try {
             Banner banner = new Banner("My banner");
-            banner.addCharacter(new Character("a", 1));
-            banner.addCharacter(new Character("b", 2));
+            banner.addCharacter(new Character("a", "1"));
+            banner.addCharacter(new Character("b", "2"));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralBanner.json");
             writer.open();
             writer.write(banner);
