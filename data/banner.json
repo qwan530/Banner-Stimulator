@@ -1,13 +1,13 @@
 {
     "characters": [
         {
-            "name": "a",
-            "rarity": 1
+            "name": "456",
+            "rarity": "1"
         },
         {
-            "name": "b",
-            "rarity": 2
+            "name": "123",
+            "rarity": "5"
         }
     ],
-    "title": "asd"
+    "title": "1"
 }
