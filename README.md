@@ -45,6 +45,24 @@ characters", then choose "add" option, or "delete" option.
 - You can save the state of my application by the button labelled "save".
 - You can reload the state of my application by the button labelled "load".
 
+## Phase 4: Task 2
+
+Fri Dec 02 15:57:51 PST 2022
+
+Character a added.
+
+Fri Dec 02 15:57:54 PST 2022
+
+Character b added.
+
+Fri Dec 02 15:57:58 PST 2022
+
+Character a deleted.
+
+Fri Dec 02 15:58:02 PST 2022
+
+Pulled b from banner.
+
 ## Phase 4: Task 3
 
 If I had more time to work on the project, I would make an interface for the buttons in the GUI. For now, they are
